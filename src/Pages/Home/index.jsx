@@ -15,7 +15,9 @@ function Home() {
           ))
         )
       }else{
-        return(<div>We don't have anything</div>)
+        return(<div className='font-bold text-2xl bg-slate-400 rounded-xl p-5'>
+          We don't have anything
+          </div>)
     }
   }
 

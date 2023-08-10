@@ -2,7 +2,32 @@ import { createContext, useState ,useEffect} from 'react'
 
 export const ShoppingCartContext = createContext()
 
+export const localStorage= ()=>{
+  const accountLS = localStorage.getItem("account")
+  const sign_outLS=localStorage.getItem("sign_out")
+  let accountInLocalStorage
+  let sign_outInLocalStorage
+
+  if(!accountLS){
+    localStorage.setItems("account",JSON.stringify({}))
+    accountInLocalStorage={}
+  }else{
+    accountInLocalStorage=JSON.stringify(accountLS)
+  }
+
+  if(!sign_outLS){
+    localStorage.setItems("sign_out",JSON.stringify(false))
+    sign_outInLocalStorage=false
+  }else{
+    sign_outInLocalStorage=JSON.stringify(sign_outLS)
+  }
+}
+
 export const ShoppingCartProvider = ({children}) => {
+  //LocalStorage
+  const [account, setAccount] = useState({})
+  const [sign_out, setSign_out] = useState(false)
+
   // Shopping Cart · Increment quantity
   const [count, setCount] = useState(0)
 
@@ -75,28 +100,18 @@ export const ShoppingCartProvider = ({children}) => {
 
   return (
     <ShoppingCartContext.Provider value={{
-      count,
-      setCount,
-      openProductDetail,
-      closeProductDetail,
-      isProductDetailOpen,
-      productToShow,
-      setProductToShow,
-      cartProducts,
-      setCartProducts,
-      isCheckoutSideMenuOpen,
-      openCheckoutSideMenu,
-      closeCheckoutSideMenu,
-      order,
-      setOrder,
-      items,
-      setItems,
-      searchByTitle, 
-      setsearchByTitle,
-      filtereditems,
-      setfilteredItems,
-      searchByCategory,
-      setsearchByCategory
+      count,setCount,
+      openProductDetail,closeProductDetail,
+      isProductDetailOpen,productToShow,
+      setProductToShow,cartProducts,
+      setCartProducts,isCheckoutSideMenuOpen,
+      openCheckoutSideMenu,closeCheckoutSideMenu,
+      order,setOrder,
+      items,setItems,
+      searchByTitle,setsearchByTitle,
+      filtereditems,setfilteredItems,
+      searchByCategory,setsearchByCategory,
+      account,setAccount,sign_out,setSign_out
     }}>
       {children}
     </ShoppingCartContext.Provider>
