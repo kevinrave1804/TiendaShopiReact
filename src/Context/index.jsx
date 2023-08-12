@@ -2,7 +2,7 @@ import { createContext, useState ,useEffect} from 'react'
 
 export const ShoppingCartContext = createContext()
 
-export const localStorage= ()=>{
+export const initializedlocalStorage= ()=>{
   const accountLS = localStorage.getItem("account")
   const sign_outLS=localStorage.getItem("sign_out")
   let accountInLocalStorage

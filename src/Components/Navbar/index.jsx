@@ -12,22 +12,18 @@ const Navbar = () => {
   const parsedSignOut=JSON.parse(signOut)
   const isUserSignOut=context.signOut || parsedSignOut
 
+
+  //Account
+  const account=localStorage.getItem('account')
+  const parsedAccount=JSON.parse(account)
+  
+  //Has an account
+  const noAccountLS=parsedAccount ? Object.keys(parsedAccount).length===0 : true
+  const noAccountContext=context.account ? Object.keys(parsedAccount).length===0 : true
+  const noAccount= !noAccountLS || !noAccountContext
+
   const signOutFuntion=()=>{
-    if(isUserSignOut) {
-      return(<li>
-          <NavLink
-            to='/sign-in'
-            onClick={()=>{
-              localStorage.setItem("sign_out",JSON.stringify(true))
-              context.setSign_out(true)
-            }}
-            className={({ isActive }) => 
-              isActive ? activeStyle : undefined
-            }>
-            Log In/Sign In
-          </NavLink>
-        </li>)
-    }else{
+    if(noAccount && !isUserSignOut) {      
       return (<>
         <li className='text-black/60'>
             kevinrave1804@gmail.com
@@ -64,6 +60,20 @@ const Navbar = () => {
           </NavLink>
         </li>
       </>)
+    }else{
+      return(<li>
+        <NavLink
+          to='/sign-in'
+          onClick={()=>{
+            localStorage.setItem("sign_out",JSON.stringify(true))
+            context.setSign_out(true)
+          }}
+          className={({ isActive }) => 
+            isActive ? activeStyle : undefined
+          }>
+          Log In/Sign In
+        </NavLink>
+      </li>)
     }
   }
 
@@ -71,7 +81,7 @@ const Navbar = () => {
     <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light'>
       <ul className='flex items-center gap-3 '>
         <li className='font-semibold text-lg'>
-          <NavLink to='/'>
+          <NavLink to={`${isUserSignOut ? '/sign-in' : '/'}`}>
             Shopi
           </NavLink>
         </li>
