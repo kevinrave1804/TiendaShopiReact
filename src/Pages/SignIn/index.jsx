@@ -23,11 +23,12 @@ function SignIn() {
   const noAccountContext=context.account ? Object.keys(context.account).length===0 : true
   const UserAccount=!noAccountLS || !noAccountContext  // Object.keys(object(Usuario)) me permite obtener las key de un json
 
-  const handleSignIn=()=>{
-    localStorage.setItem("sign_out",JSON.stringify(false))
+  const handleSignIn = () => {
+    const stringifiedSignOut = JSON.stringify(false)
+    localStorage.setItem('sign_out', stringifiedSignOut)
     context.setSign_out(false)
-    //Redirect
-    return <Navigate replace to={'/'}/>
+    // Redirect
+    return <Navigate replace to={'/'} />
   }
 
   const createAnAccount = () => {
@@ -55,12 +56,15 @@ function SignIn() {
             <input type="password" placeholder='Password' className='rounded-md h-9 shadow-lg' defaultValue={data.password}/>
           </div>
           <div className='w-1/2 text-center'>
-            <button 
-            className='text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 w-full rounded-md disabled:text-black/50 disabled:border-black/40'
-            onClick={() => handleSignIn()}
-            disabled={!UserAccount}>
-              Log In
-            </button>
+            <Link
+              to={'/'}>
+              <button 
+              className='text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 w-full rounded-md disabled:text-black/50 disabled:border-black/40'
+              onClick={() => handleSignIn()}
+              disabled={!UserAccount}>
+                Log In
+              </button>
+            </Link>
             <p>or</p>
             <button 
             className='text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 w-full rounded-md disabled:text-black/40 disabled:border-black/40'

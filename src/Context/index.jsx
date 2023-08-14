@@ -9,14 +9,14 @@ export const initializedlocalStorage= ()=>{
   let sign_outInLocalStorage
 
   if(!accountLS){
-    localStorage.setItems("account",JSON.stringify({}))
+    localStorage.setItem("account",JSON.stringify({}))
     accountInLocalStorage={}
   }else{
     accountInLocalStorage=JSON.stringify(accountLS)
   }
 
   if(!sign_outLS){
-    localStorage.setItems("sign_out",JSON.stringify(false))
+    localStorage.setItem("sign_out",JSON.stringify(false))
     sign_outInLocalStorage=false
   }else{
     sign_outInLocalStorage=JSON.stringify(sign_outLS)
